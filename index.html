@@ -13,17 +13,20 @@
 
   <body>
     <script>
-      // Your code will go here
-      // open up your console - if everything loaded properly you should see 0.9.0
-      console.log('ml5 version:', ml5.version);
+      const video = document.getElementById('video');
 
-      function setup() {
-        createCanvas(400, 400);
-      }
+        // Create a new poseNet method
+        const poseNet = ml5.poseNet(video, modelLoaded);
 
-      function draw() {
-        background(200);
-      }
+        // When the model is loaded
+        function modelLoaded() {
+        console.log('Model Loaded!');
+        }
+        // Listen to new 'pose' events
+        poseNet.on('pose', (results) => {
+        poses = results;
+        });
     </script>
+    <canvas id="video"></canvas>
   </body>
 </html>
